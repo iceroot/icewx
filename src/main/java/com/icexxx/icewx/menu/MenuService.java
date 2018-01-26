@@ -1,21 +1,29 @@
 package com.icexxx.icewx.menu;
 
 import java.util.List;
+import java.util.Map;
 
 import com.icexxx.icewx.cont.Const;
+import com.icexxx.icewx.cont.IceWxUrl;
 import com.icexxx.icewx.menu.button.ParentButton;
 import com.icexxx.icewx.menu.button.WxButton;
 import com.icexxx.icewx.menu.button.WxMenu;
 import com.icexxx.icewx.menu.type.WxTypeConvert;
 import com.icexxx.icewx.service.MessageKeyContext;
 import com.icexxx.icewx.util.IceMenuUtil;
+import com.icexxx.icewx.util.IceSerializationUtil;
+import com.icexxx.icewx.util.IceWxUtil;
+
 import cn.hutool.crypto.SecureUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
+import cn.hutool.core.codec.Base64;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.StrUtil;
 
 /**
  * icewx菜单生成
@@ -236,5 +244,45 @@ public class MenuService {
             }
         }
         return true;
+    }
+
+    public static boolean create(WxMenu menu) {
+        boolean check = MenuService.check(menu);
+        if (check) {
+            String json = MenuService.json(menu);
+            Map<String, String> map = MessageKeyContext.getMap();
+            Map<String, String> urlToken = IceWxUtil.urlToken();
+            String url = urlToken.get("url");
+            String menuToken = urlToken.get("token");
+            log.info("menuToken = {}", menuToken);
+            boolean result = createMenu(json, url, menuToken, map);
+            log.info(JSONUtil.formatJsonStr(json));
+            return result;
+        } else {
+            log.error("菜单格式不正确");
+            return false;
+        }
+
+    }
+
+    private static boolean createMenu(String body, String url, String menuToken, Map<String, String> map) {
+        String menuCreateUrl = IceWxUrl.MENU_CREATE;
+        url = StrUtil.removeSuffix(url, "/");
+        String accessTokenUrl = url + "/wx/accessToken?token=" + menuToken;
+        String accessToken = HttpUtil.get(accessTokenUrl);
+        menuCreateUrl = menuCreateUrl.replace("ACCESS_TOKEN", accessToken);
+        String post = HttpUtil.post(menuCreateUrl, body, 5000);
+        String menuUrl = StrUtil.subBefore(accessTokenUrl, "/wx/accessToken", false);
+        byte[] binaryData = IceSerializationUtil.encry(map);
+        String menuBody = Base64.encode(binaryData);
+        menuBody = menuToken + menuBody;
+        String MenuPost = HttpUtil.post(menuUrl, menuBody);
+        log.info("MenuPost = {}", MenuPost);
+        if (Const.MESSAGE_OK.equals(post)) {
+            return true;
+        } else {
+            log.error(post);
+            return false;
+        }
     }
 }

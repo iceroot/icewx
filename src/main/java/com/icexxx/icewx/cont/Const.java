@@ -29,4 +29,5 @@ public class Const {
     public static final String NONE = "none";
     public static final String VERSION_ERROR = "java.lang.UnsupportedClassVersionError";
     public static final String VERSION_ERROR_JAVA8 = "Unsupported major.minor version 52.0";
+    public static final String MESSAGE_OK = "{\"errcode\":0,\"errmsg\":\"ok\"}";
 }

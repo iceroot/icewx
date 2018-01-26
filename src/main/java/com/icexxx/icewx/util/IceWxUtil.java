@@ -35,6 +35,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
+import cn.hutool.setting.Setting;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 
@@ -281,7 +282,7 @@ public class IceWxUtil {
             String[] users = openids.split(",");
             List<String> touser = CollUtil.newArrayList(users);
             if (StrUtil.isBlank(content)) {
-                throw new RuntimeException("根据标签群发消息接口url参数content不存在");
+                throw new RuntimeException("根据OpenID群发消息接口url参数content不存在");
             }
             String body = null;
             body = textUserJson(content, touser);
@@ -968,9 +969,13 @@ public class IceWxUtil {
     public static String token() {
         String appID = IceWxContext.getAppID();
         String appsecret = IceWxContext.getAppsecret();
+        String token = IceWxContext.getToken();
         appID = appID.trim();
         appsecret = appsecret.trim();
-        String tokenHashValue = SecureUtil.md5(appID + appsecret);
+        if (token != null) {
+            token = token.trim();
+        }
+        String tokenHashValue = SecureUtil.md5(appID + appsecret + token);
         return tokenHashValue;
     }
 
@@ -1153,5 +1158,32 @@ public class IceWxUtil {
             url += "?" + queryString;
         }
         return url;
+    }
+
+    public static Map<String, String> urlToken() {
+        Setting setting = new Setting("wx.properties");
+        String appID = setting.getStr("appID");
+        String appsecret = setting.getStr("appsecret");
+        String token = setting.getStr("token");
+        String url = setting.getStr("url");
+        appID = appID.trim();
+        appsecret = appsecret.trim();
+        if (token != null) {
+            token = token.trim();
+        }
+        appID = appID.trim();
+        appsecret = appsecret.trim();
+        if (token != null) {
+            token = token.trim();
+        }
+        if (url != null) {
+            url = url.trim();
+        }
+        url = StrUtil.removeSuffix(url, "/");
+        String tokenHashValue = SecureUtil.md5(appID + appsecret + token);
+        Map<String, String> result = new HashMap<String, String>();
+        result.put("url", url);
+        result.put("token", tokenHashValue);
+        return result;
     }
 }
