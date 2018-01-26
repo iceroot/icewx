@@ -578,29 +578,125 @@ public class IceWxUtil {
             return true;
         } else if ("/:circle".equals(message)) {
             return true;
-        } else if ("/:xx".equals(message)) {
-            return true;
         } else if ("/::+".equals(message)) {
             return true;
-        } else if ("/::*".equals(message)) {
-            return true;
-        } else if ("/::<".equals(message)) {
-            return true;
-        } else if ("/::>".equals(message)) {
-            return true;
-        } else if ("/::@".equals(message)) {
+        } else if ("﻿/::)".equals(message)) {
             return true;
         } else if ("/::~".equals(message)) {
             return true;
-        } else if ("/:B-)".equals(message)) {
+        } else if ("/::B".equals(message)) {
+            return true;
+        } else if ("/::|".equals(message)) {
+            return true;
+        } else if ("/:8-)".equals(message)) {
+            return true;
+        } else if ("/::<".equals(message)) {
+            return true;
+        } else if ("/::/::$".equals(message)) {
+            return true;
+        } else if ("/::X".equals(message)) {
+            return true;
+        } else if ("/::Z".equals(message)) {
+            return true;
+        } else if ("/::'(".equals(message)) {
+            return true;
+        } else if ("/::-|".equals(message)) {
+            return true;
+        } else if ("/::@".equals(message)) {
+            return true;
+        } else if ("/::P".equals(message)) {
+            return true;
+        } else if ("/::D".equals(message)) {
+            return true;
+        } else if ("/::O".equals(message)) {
+            return true;
+        } else if ("/::(".equals(message)) {
+            return true;
+        } else if ("/::Q".equals(message)) {
+            return true;
+        } else if ("/::T".equals(message)) {
+            return true;
+        } else if ("/:,@P".equals(message)) {
+            return true;
+        } else if ("/:,@-D".equals(message)) {
+            return true;
+        } else if ("/::d".equals(message)) {
+            return true;
+        } else if ("/:,@o".equals(message)) {
+            return true;
+        } else if ("/:|-)".equals(message)) {
+            return true;
+        } else if ("/::!".equals(message)) {
             return true;
         } else if ("/::L".equals(message)) {
             return true;
+        } else if ("/::>".equals(message)) {
+            return true;
+        } else if ("/::,@".equals(message)) {
+            return true;
+        } else if ("/:,@f".equals(message)) {
+            return true;
+        } else if ("/::-S".equals(message)) {
+            return true;
+        } else if ("/:?".equals(message)) {
+            return true;
+        } else if ("/:,@x".equals(message)) {
+            return true;
+        } else if ("/:,@@".equals(message)) {
+            return true;
+        } else if ("/:,@!".equals(message)) {
+            return true;
+        } else if ("/:!!!".equals(message)) {
+            return true;
+        } else if ("/:xx".equals(message)) {
+            return true;
+        } else if ("/:B-)".equals(message)) {
+            return true;
+        } else if ("/:<@".equals(message)) {
+            return true;
+        } else if ("/:@>".equals(message)) {
+            return true;
+        } else if ("/::-O".equals(message)) {
+            return true;
+        } else if ("/:>-|".equals(message)) {
+            return true;
+        } else if ("/:P-(".equals(message)) {
+            return true;
+        } else if ("/::'|".equals(message)) {
+            return true;
+        } else if ("/:X-)".equals(message)) {
+            return true;
+        } else if ("/::*".equals(message)) {
+            return true;
+        } else if ("/:8*".equals(message)) {
+            return true;
+        } else if ("/:pd".equals(message)) {
+            return true;
+        } else if ("/:<W>".equals(message)) {
+            return true;
+        } else if ("/:bye".equals(message)) {
+            return true;
+        } else if ("/:wipe".equals(message)) {
+            return true;
+        } else if ("/:dig".equals(message)) {
+            return true;
         } else if ("/:handclap".equals(message)) {
+            return true;
+        } else if ("/:beer".equals(message)) {
             return true;
         } else if ("/:coffee".equals(message)) {
             return true;
-        } else if ("/:,@f".equals(message)) {
+        } else if ("/:pig".equals(message)) {
+            return true;
+        } else if ("/:rose".equals(message)) {
+            return true;
+        } else if ("/:fade".equals(message)) {
+            return true;
+        } else if ("/:showlove".equals(message)) {
+            return true;
+        } else if ("/:heart".equals(message)) {
+            return true;
+        } else if ("/:break".equals(message)) {
             return true;
         } else if ("[Hey]".equals(message)) {
             return true;
@@ -617,6 +713,8 @@ public class IceWxUtil {
         } else if ("[Packet]".equals(message)) {
             return true;
         } else if ("[Chick]".equals(message)) {
+            return true;
+        } else if ("[囧]".equals(message)) {
             return true;
         } else {
             if (message.length() != 1) {
@@ -692,30 +790,126 @@ public class IceWxUtil {
             return "<O>";
         } else if ("/:circle".equals(message)) {
             return "circle";
-        } else if ("/:xx".equals(message)) {
-            return "[敲打]";
         } else if ("/::+".equals(message)) {
-            return "[酷]";
-        } else if ("/::*".equals(message)) {
-            return "/::*";
+            return "/::+";
+        } else if ("﻿/::)".equals(message)) {
+            return "﻿/::)";
+        } else if ("/::~".equals(message)) {
+            return "/::~";
+        } else if ("/::B".equals(message)) {
+            return "/::B";
+        } else if ("/::|".equals(message)) {
+            return "/::|";
+        } else if ("/:8-)".equals(message)) {
+            return "/:8-)";
         } else if ("/::<".equals(message)) {
-            return "[流泪]";
-        } else if ("/::>".equals(message)) {
-            return "/::>";
+            return "/::<";
+        } else if ("/::/::$".equals(message)) {
+            return "/::/::$";
+        } else if ("/::X".equals(message)) {
+            return "/::X";
+        } else if ("/::Z".equals(message)) {
+            return "/::Z";
+        } else if ("/::'(".equals(message)) {
+            return "/::'(";
+        } else if ("/::-|".equals(message)) {
+            return "/::-|";
         } else if ("/::@".equals(message)) {
             return "/::@";
-        } else if ("/::~".equals(message)) {
-            return "[撇嘴]";
-        } else if ("/:B-)".equals(message)) {
-            return "[坏笑]";
+        } else if ("/::P".equals(message)) {
+            return "/::P";
+        } else if ("/::D".equals(message)) {
+            return "/::D";
+        } else if ("/::O".equals(message)) {
+            return "/::O";
+        } else if ("/::(".equals(message)) {
+            return "/::(";
+        } else if ("/::Q".equals(message)) {
+            return "/::Q";
+        } else if ("/::T".equals(message)) {
+            return "/::T";
+        } else if ("/:,@P".equals(message)) {
+            return "/:,@P";
+        } else if ("/:,@-D".equals(message)) {
+            return "/:,@-D";
+        } else if ("/::d".equals(message)) {
+            return "/::d";
+        } else if ("/:,@o".equals(message)) {
+            return "/:,@o";
+        } else if ("/:|-)".equals(message)) {
+            return "/:|-)";
+        } else if ("/::!".equals(message)) {
+            return "/::!";
         } else if ("/::L".equals(message)) {
-            return "[流汗]";
-        } else if ("/:handclap".equals(message)) {
-            return "[鼓掌]";
-        } else if ("/:coffee".equals(message)) {
-            return "[咖啡]";
+            return "/::L";
+        } else if ("/::>".equals(message)) {
+            return "/::>";
+        } else if ("/::,@".equals(message)) {
+            return "/::,@";
         } else if ("/:,@f".equals(message)) {
-            return "[奋斗]";
+            return "/:,@f";
+        } else if ("/::-S".equals(message)) {
+            return "/::-S";
+        } else if ("/:?".equals(message)) {
+            return "/:?";
+        } else if ("/:,@x".equals(message)) {
+            return "/:,@x";
+        } else if ("/:,@@".equals(message)) {
+            return "/:,@@";
+        } else if ("/:,@!".equals(message)) {
+            return "/:,@!";
+        } else if ("/:!!!".equals(message)) {
+            return "/:!!!";
+        } else if ("/:xx".equals(message)) {
+            return "/:xx";
+        } else if ("/:B-)".equals(message)) {
+            return "/:B-)";
+        } else if ("/:<@".equals(message)) {
+            return "/:<@";
+        } else if ("/:@>".equals(message)) {
+            return "/:@>";
+        } else if ("/::-O".equals(message)) {
+            return "/::-O";
+        } else if ("/:>-|".equals(message)) {
+            return "/:>-|";
+        } else if ("/:P-(".equals(message)) {
+            return "/:P-(";
+        } else if ("/::'|".equals(message)) {
+            return "/::'|";
+        } else if ("/:X-)".equals(message)) {
+            return "/:X-)";
+        } else if ("/::*".equals(message)) {
+            return "/::*";
+        } else if ("/:8*".equals(message)) {
+            return "/:8*";
+        } else if ("/:pd".equals(message)) {
+            return "/:pd";
+        } else if ("/:<W>".equals(message)) {
+            return "/:<W>";
+        } else if ("/:bye".equals(message)) {
+            return "/:bye";
+        } else if ("/:wipe".equals(message)) {
+            return "/:wipe";
+        } else if ("/:dig".equals(message)) {
+            return "/:dig";
+        } else if ("/:handclap".equals(message)) {
+            return "/:handclap";
+        } else if ("/:beer".equals(message)) {
+            return "/:beer";
+        } else if ("/:coffee".equals(message)) {
+            return "/:coffee";
+        } else if ("/:pig".equals(message)) {
+            return "/:pig";
+        } else if ("/:rose".equals(message)) {
+            return "/:rose";
+        } else if ("/:fade".equals(message)) {
+            return "/:fade";
+        } else if ("/:showlove".equals(message)) {
+            return "/:showlove";
+        } else if ("/:heart".equals(message)) {
+            return "/:heart";
+        } else if ("/:break".equals(message)) {
+            return "/:break";
         } else if ("[Hey]".equals(message)) {
             return "{Hey}";
         } else if ("[Facepalm]".equals(message)) {
@@ -732,6 +926,8 @@ public class IceWxUtil {
             return "{Packet}";
         } else if ("[Chick]".equals(message)) {
             return "{Chick}";
+        } else if ("[囧]".equals(message)) {
+            return "[囧]";
         } else {
             if (message.length() != 1) {
                 return null;

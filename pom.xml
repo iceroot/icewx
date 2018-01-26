@@ -28,7 +28,7 @@
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
-            <version>4.0.1</version>
+            <version>4.0.2</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
@@ -62,12 +62,12 @@
 
     <issueManagement>
         <system>Github Issue</system>
-        <url>https://github.com/icexxx/icewx.git</url>
+        <url>https://github.com/iceroot/icewx.git</url>
     </issueManagement>
     <scm>
-        <connection>scm:git:https://github.com/icexxx/icewx.git</connection>
-        <developerConnection>scm:git:https://github.com/icexxx/icewx.git</developerConnection>
-        <url>https://github.com/icexxx/icewx.git</url>
+        <connection>scm:git:https://github.com/iceroot/icewx.git</connection>
+        <developerConnection>scm:git:https://github.com/iceroot/icewx.git</developerConnection>
+        <url>https://github.com/iceroot/icewx.git</url>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

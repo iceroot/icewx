@@ -22,10 +22,6 @@ public class DefaultMessageProcessor implements TextProcessor {
             MessageSender.sendEmptyMessage();
             return null;
         }
-        if ("null".equals(message)) {
-            MessageSender.send("");
-            return null;
-        }
         if ("newLine".equals(message)) {
             MessageSender.send("abc\ndef\nghi\n\njklmn\ropqrst\r\nuvwxyz");
             return null;
@@ -51,7 +47,7 @@ public class DefaultMessageProcessor implements TextProcessor {
         if (IceWxUtil.isFace(message)) {
             return "表情:" + IceWxUtil.convertFace(message);
         }
-        return "你发送了:" + message;
+        return message;
     }
 
 }
