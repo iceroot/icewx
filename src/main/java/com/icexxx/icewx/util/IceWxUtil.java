@@ -38,6 +38,7 @@ import cn.hutool.log.LogFactory;
 import cn.hutool.setting.Setting;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.core.util.URLUtil;
 
 /**
  * icewx &nbsp; 微信核心工具类
@@ -245,7 +246,7 @@ public class IceWxUtil {
             url = IceWxUrl.USER_REMARK;
             url = url.replace("ACCESS_TOKEN", accessToken);
             String openid = map.get("openid");
-            String remark = map.get("remark");
+            String remark = urlDecode(map.get("remark"));
             if (StrUtil.isBlank(openid)) {
                 throw new RuntimeException("设置用户备注接口url参数openid不存在");
             }
@@ -260,7 +261,7 @@ public class IceWxUtil {
             url = IceWxUrl.MASS_SENDALL;
             url = url.replace("ACCESS_TOKEN", accessToken);
             String tagId = map.get("tagId");
-            String content = map.get("content");
+            String content = urlDecode(map.get("content"));
             Integer tagIdNum = Convert.toInt(tagId);
             if (StrUtil.isBlank(content)) {
                 throw new RuntimeException("根据标签群发消息接口url参数content不存在");
@@ -278,9 +279,12 @@ public class IceWxUtil {
             url = IceWxUrl.MASS_SEND;
             url = url.replace("ACCESS_TOKEN", accessToken);
             String openids = map.get("openid");
-            String content = map.get("content");
+            String content = urlDecode(map.get("content"));
             String[] users = openids.split(",");
             List<String> touser = CollUtil.newArrayList(users);
+            if (CollUtil.isEmpty(touser) || touser.size() < 2) {
+                throw new RuntimeException("openid至少需要指定两个,多个用逗号分隔");
+            }
             if (StrUtil.isBlank(content)) {
                 throw new RuntimeException("根据OpenID群发消息接口url参数content不存在");
             }
@@ -1185,5 +1189,13 @@ public class IceWxUtil {
         result.put("url", url);
         result.put("token", tokenHashValue);
         return result;
+    }
+
+    public static String urlDecode(String str) {
+        if (str.contains("%")) {
+            return URLUtil.decode(str);
+        } else {
+            return str;
+        }
     }
 }
