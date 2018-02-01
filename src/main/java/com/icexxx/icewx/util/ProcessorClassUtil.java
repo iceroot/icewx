@@ -3,6 +3,7 @@ package com.icexxx.icewx.util;
 import com.icexxx.icewx.msg.ClickEventProcessor;
 import com.icexxx.icewx.msg.FileProcessor;
 import com.icexxx.icewx.msg.ImageProcessor;
+import com.icexxx.icewx.msg.InitProcessor;
 import com.icexxx.icewx.msg.LinkProcessor;
 import com.icexxx.icewx.msg.LocationEventProcessor;
 import com.icexxx.icewx.msg.LocationProcessor;
@@ -151,6 +152,15 @@ public class ProcessorClassUtil {
                 ScanEventProcessor scanEventProcessor = IceWxUtil.newInstance(className);
                 if (scanEventProcessor != null) {
                     ProcessorContext.setScanEventMessageProcessor(scanEventProcessor);
+                }
+            }
+        } else if (InitProcessor.class.isAssignableFrom(clazz)) {
+            String keyName = "init";
+            String init = IceSettingContext.getSetting(keyName);
+            if (init == null) {
+                InitProcessor initProcessor = IceWxUtil.newInstance(className);
+                if (initProcessor != null) {
+                    ProcessorContext.setInitProcessor(initProcessor);
                 }
             }
         }

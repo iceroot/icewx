@@ -3,6 +3,7 @@ package com.icexxx.icewx.service;
 import com.icexxx.icewx.msg.ClickEventProcessor;
 import com.icexxx.icewx.msg.FileProcessor;
 import com.icexxx.icewx.msg.ImageProcessor;
+import com.icexxx.icewx.msg.InitProcessor;
 import com.icexxx.icewx.msg.LinkProcessor;
 import com.icexxx.icewx.msg.LocationEventProcessor;
 import com.icexxx.icewx.msg.LocationProcessor;
@@ -38,6 +39,7 @@ public class ProcessorContext {
     private static ScanEventProcessor scanEventMessageProcessor;
     private static SubscribeEventProcessor subscribeEventMessageProcessor;
     private static UnsubscribeEventProcessor unsubscribeEventMessageProcessor;
+    private static InitProcessor initProcessor;
 
     public static ImageProcessor getImageMessageProcessor() {
         return imageMessageProcessor;
@@ -165,5 +167,13 @@ public class ProcessorContext {
 
     public static void setUnsubscribeEventMessageProcessor(UnsubscribeEventProcessor unsubscribeEventMessageProcessor) {
         ProcessorContext.unsubscribeEventMessageProcessor = unsubscribeEventMessageProcessor;
+    }
+
+    public static InitProcessor getInitProcessor() {
+        return initProcessor;
+    }
+
+    public static void setInitProcessor(InitProcessor initProcessor) {
+        ProcessorContext.initProcessor = initProcessor;
     }
 }

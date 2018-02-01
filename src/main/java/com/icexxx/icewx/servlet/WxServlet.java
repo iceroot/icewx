@@ -14,6 +14,7 @@ import com.icexxx.icewx.msg.ClickEventProcessor;
 import com.icexxx.icewx.msg.DefaultMessageProcessor;
 import com.icexxx.icewx.msg.FileProcessor;
 import com.icexxx.icewx.msg.ImageProcessor;
+import com.icexxx.icewx.msg.InitProcessor;
 import com.icexxx.icewx.msg.LinkProcessor;
 import com.icexxx.icewx.msg.LocationEventProcessor;
 import com.icexxx.icewx.msg.LocationProcessor;
@@ -325,6 +326,7 @@ public class WxServlet extends HttpServlet {
         String scanEventMessage = setting.getStr("scanEventMessage");
         String subscribeEventMessage = setting.getStr("subscribeEventMessage");
         String unsubscribeEventMessage = setting.getStr("unsubscribeEventMessage");
+        String init = setting.getStr("init");
         TextProcessor beforeMessageProcessor = IceWxUtil.newInstance(beforeMessage);
         TextProcessor afterMessageProcessor = IceWxUtil.newInstance(afterMessage);
         ImageProcessor imageMessageProcessor = IceWxUtil.newInstance(imageMessage);
@@ -340,6 +342,7 @@ public class WxServlet extends HttpServlet {
         ScanEventProcessor scanEventMessageProcessor = IceWxUtil.newInstance(scanEventMessage);
         SubscribeEventProcessor subscribeEventMessageProcessor = IceWxUtil.newInstance(subscribeEventMessage);
         UnsubscribeEventProcessor unsubscribeEventMessageProcessor = IceWxUtil.newInstance(unsubscribeEventMessage);
+        InitProcessor initProcessor = IceWxUtil.newInstance(init);
         if (StrUtil.isBlank(appID)) {
             throw new RuntimeException("wx.properties配置文件的appID不能为空");
         }
@@ -401,6 +404,9 @@ public class WxServlet extends HttpServlet {
         if (unsubscribeEventMessageProcessor != null) {
             ProcessorContext.setUnsubscribeEventMessageProcessor(unsubscribeEventMessageProcessor);
         }
+        if (initProcessor != null) {
+            ProcessorContext.setInitProcessor(initProcessor);
+        }
         CronUtil.start();
         log.info("-----------------cron start-----------------");
         AccessTokenService.refresh();
@@ -409,5 +415,9 @@ public class WxServlet extends HttpServlet {
         Map<String, String> map = IceWxUtil.read();
         MessageKeyContext.setMap(map);
         IceWxUtil.scanPackage(classPath);
+        initProcessor = ProcessorContext.getInitProcessor();
+        if (initProcessor != null) {
+            initProcessor.init();
+        }
     }
 }
