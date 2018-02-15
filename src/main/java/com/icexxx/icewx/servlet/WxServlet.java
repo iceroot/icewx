@@ -63,9 +63,9 @@ public class WxServlet extends HttpServlet {
         String nonce = request.getParameter("nonce");
         String echostr = request.getParameter("echostr");
         String pathInfo = request.getPathInfo();
-        String pathTranslated = request.getPathTranslated();
         String queryString = request.getQueryString();
         StringBuffer requestURL = request.getRequestURL();
+        String realPath = request.getSession().getServletContext().getRealPath("/index.jsp");
         if (StrUtil.isNotBlank(signature)) {
             String token = IceWxContext.getToken();
             boolean sign = IceWxUtil.checkSign(token, timestamp, nonce, signature);
@@ -75,9 +75,10 @@ public class WxServlet extends HttpServlet {
                 response.getWriter().append("ERROR");
             }
         } else {
-            if (pathInfo != null) {
-                if (pathInfo.equals("/")) {
-                    IceWxUtil.jumpJsp(response, pathTranslated);
+            realPath = StrUtil.removeSuffix(realPath, "index.jsp");
+            if (realPath != null) {
+                if (pathInfo == null || pathInfo.equals("/")) {
+                    IceWxUtil.jumpJsp(response, realPath);
                 } else if (pathInfo.startsWith("/wx")) {
                     String token = request.getParameter("token");
                     String tokenHashValue = IceWxUtil.token();
@@ -93,7 +94,7 @@ public class WxServlet extends HttpServlet {
                 }
 
             } else {
-                IceWxUtil.jumpJsp(response, pathTranslated);
+                IceWxUtil.jumpJsp(response, realPath);
             }
         }
     }

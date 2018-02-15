@@ -200,6 +200,7 @@ public class IceWxUtil {
                 jsp = FileUtil.readString(pathTranslated, charset);
             }
             jsp = IceWxUtil.removeTag(jsp);
+            response.setCharacterEncoding(charset);
             response.getWriter().append(jsp);
         } else {
             response.getWriter().append("index");
