@@ -518,17 +518,37 @@ public class IceWxUtil {
         }
         messageSave = messageSave.replace("\\", "/");
         if (messageSave.endsWith("/")) {
-            messageSave += "msgdata.txt";
+            String hash = getHash();
+            messageSave += "msgdata_" + hash + ".txt";
         }
         IceWxContext.setMessageSave(messageSave);
         return messageSave;
     }
 
+    private static String getHash() {
+        String appID = IceWxContext.getAppID();
+        String appsecret = IceWxContext.getAppsecret();
+        StringBuilder sb = new StringBuilder();
+        if (StrUtil.isNotBlank(appID)) {
+            sb.append(appID);
+        }
+        if (StrUtil.isNotBlank(appsecret)) {
+            sb.append(appsecret);
+        }
+        String str = sb.toString();
+        String md5 = SecureUtil.md5(str);
+        if (StrUtil.isNotBlank(md5)) {
+            return md5.substring(0, 8);
+        }
+        return null;
+    }
+
     private static String defaultMessageSavePath() {
         boolean isWindow = FileUtil.isWindows();
+        String hash = getHash();
         if (isWindow) {
             if (FileUtil.exist("C:/ProgramData")) {
-                return "C:/ProgramData/icewx/msgdata.txt";
+                return "C:/ProgramData/icewx/msgdata_" + hash + ".txt";
             }
             File[] listRoots = File.listRoots();
             for (int i = 0; i < listRoots.length; i++) {
@@ -537,12 +557,12 @@ public class IceWxUtil {
                     String disk = folder.getAbsolutePath();
                     disk = disk.replace("\\", "/");
                     disk = StrUtil.removeSuffix(disk, "/");
-                    disk += "/icewx/msgdata.txt";
+                    disk += "/icewx/msgdata_" + hash + ".txt";
                     return disk;
                 }
             }
         } else {
-            return "/usr/local/icewx/msgdata.txt";
+            return "/usr/local/icewx/msgdata_" + hash + ".txt";
         }
         return null;
     }
@@ -975,6 +995,16 @@ public class IceWxUtil {
         String appID = IceWxContext.getAppID();
         String appsecret = IceWxContext.getAppsecret();
         String token = IceWxContext.getToken();
+        if (appID == null) {
+            Setting setting = new Setting("wx.properties");
+            appID = setting.getStr("appID");
+            if (appsecret == null) {
+                appsecret = setting.getStr("appsecret");
+            }
+            if (token == null) {
+                token = setting.getStr("token");
+            }
+        }
         appID = appID.trim();
         appsecret = appsecret.trim();
         if (token != null) {
@@ -1052,6 +1082,24 @@ public class IceWxUtil {
         classPath = StrUtil.removeSuffix(classPath, "webapps");
         classPath += "conf/server.xml";
         return classPath;
+    }
+
+    public static String webXml(String classPath) {
+        classPath = StrUtil.removeSuffix(classPath, "classes/");
+        classPath += "web.xml";
+        return classPath;
+    }
+
+    public static boolean check(String webXml) {
+        List<String> lines = FileUtil.readUtf8Lines(webXml);
+        for (String line : lines) {
+            if (StrUtil.isNotBlank(line)) {
+                if ("<servlet-class>com.icexxx.icewx.servlet.WxServlet</servlet-class>".equals(line.trim())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public static String readPort(String serverXmlPath) {
@@ -1198,5 +1246,13 @@ public class IceWxUtil {
         } else {
             return str;
         }
+    }
+
+    public static String jdkVersion() {
+        return System.getProperty("java.class.version");
+    }
+
+    public static boolean checkJdkVersion() {
+        return !"52.0".equals(System.getProperty("java.class.version"));
     }
 }

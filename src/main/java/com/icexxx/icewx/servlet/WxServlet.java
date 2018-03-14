@@ -89,6 +89,7 @@ public class WxServlet extends HttpServlet {
                         String suffix = StrUtil.removePrefix(pathInfo, "/wx/");
                         message = IceWxUtil.getMessageByUrl(suffix, queryString);
                     }
+                    response.setContentType("text/html;charset=UTF-8");
                     response.setCharacterEncoding("UTF-8");
                     response.getWriter().append(message);
                 }

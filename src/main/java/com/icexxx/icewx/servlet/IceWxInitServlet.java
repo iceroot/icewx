@@ -74,6 +74,13 @@ public class IceWxInitServlet extends HttpServlet {
                             }
                         }
                     }
+                } finally {
+                    String classPath = ClassUtil.getClassPath();
+                    String webXml = IceWxUtil.webXml(classPath);
+                    boolean hasWxServlet = IceWxUtil.check(webXml);
+                    if (!hasWxServlet) {
+                        log.error("web.xml需要一个iceWxServlet配置,你可以使用com.icexxx.icewx.gen.IceWxGen.gen()方法生成它.");
+                    }
                 }
             }
         }.start();
