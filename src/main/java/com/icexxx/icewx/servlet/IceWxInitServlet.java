@@ -35,6 +35,9 @@ public class IceWxInitServlet extends HttpServlet {
         String port = "80";
         if (FileUtil.exist(serverXmlPath)) {
             port = IceWxUtil.readPort(serverXmlPath);
+            if (!"80".equals(port) && !"443".equals(port)) {
+                log.error("url地址必须使用80或443端口");
+            }
         }
         final String ip = NetUtil.getLocalhostStr();
         String pageUrl = "http://" + ip + ":" + port;
@@ -51,7 +54,7 @@ public class IceWxInitServlet extends HttpServlet {
                     result = HttpUtil.get(urlThread);
                     if (result != null) {
                         log.info("url=" + urlThread);
-                        log.info(StrUtil.subPre(result, 100));
+                        log.info(StrUtil.subPre(result, 200));
                         if (IceWxUtil.isJavaVersionError(result)) {
                             throw new RuntimeException("代码java版本不一致,建议使用jdk 1.7重新编译war文件.");
                         }
